@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcfm5ddt10s2c"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_084jp"]
+[ext_resource type="PackedScene" uid="uid://cnlmujxkoq3ti" path="res://Scenes/Weapons/Projectiles/Projectile.tscn" id="2_5526o"]
+[ext_resource type="PackedScene" uid="uid://d02688q4gswd" path="res://Imported Assets/Models/Evan Tan Henry Rifle/Evan Tan Henry Rifle.glb" id="2_vubfe"]
+
+[node name="Rifle" type="Node3D" node_paths=PackedStringArray("fire_position")]
+script = ExtResource("1_084jp")
+fire_position = NodePath("GFX/Evan Tan Henry Rifle/Fire Point")
+fires_real_projectile = true
+projectile_to_fire = ExtResource("2_5526o")
+
+[node name="GFX" type="Node3D" parent="."]
+
+[node name="Evan Tan Henry Rifle" parent="GFX" instance=ExtResource("2_vubfe")]
+transform = Transform3D(-2.18557e-08, -2.18557e-08, -0.5, 2.18557e-08, 0.5, -2.18557e-08, 0.5, -2.18557e-08, -2.18557e-08, 0, 0, 0)
+
+[node name="Fire Point" type="Marker3D" parent="GFX/Evan Tan Henry Rifle"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, -4.2, 0.321224, 1.69547e-07)

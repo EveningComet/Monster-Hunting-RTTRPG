@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Job" load_steps=2 format=3 uid="uid://btjk5jt2e2n7h"]
+
+[ext_resource type="Script" path="res://Scripts/Stats/Job.gd" id="1_sibki"]
+
+[resource]
+script = ExtResource("1_sibki")
+job_name = "Engineer"
+description = "A guy that enjoys building things."
+abilities = Array[Resource("res://Scripts/Ability/Ability.gd")]([])
+allowed_weapon_types = Array[int]([1, 3])
+starting_fitness = 20
+starting_dexterity = 20
+starting_will = 20
+fitness_gain_on_increase = 2
+dexterity_gain_on_increase = 3
+will_gain_on_increase = 4

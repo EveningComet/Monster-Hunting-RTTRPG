@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://lejby2iis5uc"]
+
+[ext_resource type="Resource" uid="uid://c5bphv4se6yhk" path="res://Game Data/Abilities/Toss Explosive/Toss Explosive Effect.tres" id="1_1uam5"]
+[ext_resource type="Script" path="res://Scripts/Ability/Ability.gd" id="1_t8hxh"]
+
+[resource]
+script = ExtResource("1_t8hxh")
+ability_name = "Toss Explosive"
+ability_description = "An ability that is most bodacious."
+base_cooldown = 10.0
+max_range = 10.0
+special_cost = 0
+effects = Array[Resource("res://Scripts/Ability/AbilityEffect.gd")]([ExtResource("1_1uam5")])

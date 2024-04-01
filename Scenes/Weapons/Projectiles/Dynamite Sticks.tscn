@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bp0bypl754hm1"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/Projectile.gd" id="1_6nrhy"]
+[ext_resource type="PackedScene" uid="uid://4wg7rtr2oei1" path="res://Scenes/Weapons/Explosion.tscn" id="2_x7cg1"]
+[ext_resource type="PackedScene" uid="uid://dkv3valgbefph" path="res://Imported Assets/Models/Loafbrr Dynamite Sticks/Loafbrr Dynamite Sticks.glb" id="3_6guhe"]
+[ext_resource type="Script" path="res://Scripts/General Components/FactionOwner.gd" id="4_3jwsq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mceok"]
+size = Vector3(0.25, 0.8, 0.25)
+
+[node name="Dynamite Sticks" type="CharacterBody3D"]
+script = ExtResource("1_6nrhy")
+gravity_strength = 10.0
+arc = true
+explodes_on_impact = true
+explosion_scene = ExtResource("2_x7cg1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393523, 0)
+shape = SubResource("BoxShape3D_mceok")
+
+[node name="GFX" type="Node3D" parent="."]
+
+[node name="Loafbrr Dynamite Sticks" parent="GFX" instance=ExtResource("3_6guhe")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("4_3jwsq")

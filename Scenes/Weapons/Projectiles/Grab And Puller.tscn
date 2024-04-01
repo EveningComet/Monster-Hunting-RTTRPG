@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc5k3srr5y3n3"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/GrabAndPuller.gd" id="1_b36h2"]
+[ext_resource type="Script" path="res://Scripts/General Components/FactionOwner.gd" id="2_o2akw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_63x6m"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="GrabAndPuller" type="CharacterBody3D"]
+script = ExtResource("1_b36h2")
+max_lifetime = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_63x6m")
+
+[node name="GFX" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="GFX"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("2_o2akw")

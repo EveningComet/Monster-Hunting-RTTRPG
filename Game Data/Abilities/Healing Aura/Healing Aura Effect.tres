@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpawnHealingAOE" load_steps=3 format=3 uid="uid://b170oprpl0gcy"]
+
+[ext_resource type="Script" path="res://Scripts/Ability/Effects/SpawnHealingAOE.gd" id="1_vr1un"]
+[ext_resource type="PackedScene" uid="uid://dt4bge15kk5pw" path="res://Scenes/Ability Spawnables/Healing Aura.tscn" id="1_wp4gn"]
+
+[resource]
+script = ExtResource("1_vr1un")
+healing_aura_scene = ExtResource("1_wp4gn")
+value_scale = 1.5
+uses_special_stat = true

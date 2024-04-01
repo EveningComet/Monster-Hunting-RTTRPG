@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://dt4bge15kk5pw"]
+
+[ext_resource type="Script" path="res://Scripts/General Components/HealingAura.gd" id="1_273nu"]
+[ext_resource type="Script" path="res://Scripts/General Components/FactionOwner.gd" id="2_4ujc0"]
+[ext_resource type="Texture2D" uid="uid://tckbbkgn76fb" path="res://Imported Assets/KenneyNL Particle Pack/magic_05.png" id="3_y58v3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yrrlb"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="Gradient" id="Gradient_4y3rh"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6vn2u"]
+gradient = SubResource("Gradient_4y3rh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k6cqm"]
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector3(0, 0, 0)
+spread = 90.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -0.2, 0)
+color_ramp = SubResource("GradientTexture1D_6vn2u")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h21l"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.34902, 0.658824, 0.470588, 1)
+albedo_texture = ExtResource("3_y58v3")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_hkyw1"]
+material = SubResource("StandardMaterial3D_3h21l")
+
+[node name="Healing Aura" type="Area3D" node_paths=PackedStringArray("my_faction")]
+script = ExtResource("1_273nu")
+my_faction = NodePath("FactionOwner")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_yrrlb")
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("2_4ujc0")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_k6cqm")
+draw_pass_1 = SubResource("QuadMesh_hkyw1")

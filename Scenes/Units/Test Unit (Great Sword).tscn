@@ -1,0 +1,79 @@
+[gd_scene load_steps=15 format=3 uid="uid://d4dijn8vpyyw4"]
+
+[ext_resource type="Script" path="res://Scripts/General Components/FactionOwner.gd" id="1_hlfpo"]
+[ext_resource type="Script" path="res://Scripts/Stats/PlayerCharacterStats.gd" id="2_2ae6r"]
+[ext_resource type="Script" path="res://Scripts/Unit/Mover.gd" id="3_u1q5h"]
+[ext_resource type="Script" path="res://Scripts/Unit/AwarenessRadius.gd" id="4_x1s8f"]
+[ext_resource type="PackedScene" uid="uid://ddriw1bxlsiry" path="res://Scenes/Weapons/Great Sword.tscn" id="5_2m5qj"]
+[ext_resource type="Script" path="res://Scripts/Unit/EquipmentBasedAttacker.gd" id="6_mxu48"]
+[ext_resource type="Script" path="res://Scripts/Stats/JobHolder.gd" id="7_t6pxq"]
+[ext_resource type="Resource" uid="uid://cey7mtn08r3nq" path="res://Game Data/Jobs/Druid.tres" id="8_d3gm7"]
+[ext_resource type="Script" path="res://Scripts/Unit/AbilityHandler.gd" id="9_rkfau"]
+[ext_resource type="Resource" uid="uid://ckartx5jfv0kk" path="res://Game Data/Abilities/Healing Aura/Healing Aura.tres" id="10_wrggm"]
+[ext_resource type="Resource" uid="uid://c7cv2q6dqghoe" path="res://Game Data/Abilities/Pull Towards/Pull Towards.tres" id="11_pttfr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egakl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tgkw5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d88m8"]
+radius = 20.0
+
+[node name="Test Unit (Great Sword)" type="CharacterBody3D" groups=["Units"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_egakl")
+
+[node name="GFX" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GFX"]
+mesh = SubResource("CapsuleMesh_tgkw5")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="GFX/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.627091, -0.357248)
+size = Vector3(0.5, 0.25, 0.5)
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("1_hlfpo")
+
+[node name="CharacterStats" type="Node" parent="."]
+script = ExtResource("2_2ae6r")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 0.5
+
+[node name="Mover" type="Node" parent="." node_paths=PackedStringArray("navigation_agent")]
+script = ExtResource("3_u1q5h")
+navigation_agent = NodePath("../NavigationAgent3D")
+
+[node name="AwarenessRadius" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("4_x1s8f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AwarenessRadius"]
+shape = SubResource("SphereShape3D_d88m8")
+
+[node name="Weapon Hold Pos" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.14765, -0.967893)
+
+[node name="Great Sword" parent="Weapon Hold Pos" instance=ExtResource("5_2m5qj")]
+
+[node name="EquipmentBasedAttacker" type="Node" parent="." node_paths=PackedStringArray("curr_weapon", "stats")]
+script = ExtResource("6_mxu48")
+curr_weapon = NodePath("../Weapon Hold Pos/Great Sword")
+range = 5.0
+stats = NodePath("../CharacterStats")
+activation_rate = 2.0
+
+[node name="JobHolder" type="Node" parent="."]
+script = ExtResource("7_t6pxq")
+job_data = ExtResource("8_d3gm7")
+
+[node name="AbilityHandler" type="Node" parent="."]
+script = ExtResource("9_rkfau")
+abilities_to_instance = Array[Resource("res://Scripts/Ability/Ability.gd")]([ExtResource("10_wrggm"), ExtResource("11_pttfr")])

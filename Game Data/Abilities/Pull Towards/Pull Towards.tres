@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://c7cv2q6dqghoe"]
+
+[ext_resource type="Script" path="res://Scripts/Ability/Ability.gd" id="1_0qdxc"]
+[ext_resource type="Resource" uid="uid://btkkthvhn6fkh" path="res://Game Data/Abilities/Pull Towards/Pull Towards Effect.tres" id="1_m3cqm"]
+
+[resource]
+script = ExtResource("1_0qdxc")
+ability_name = "Pull Towards"
+ability_description = "Use your trusty whip."
+base_cooldown = 3.0
+max_range = 10.0
+special_cost = 5
+effects = Array[Resource("res://Scripts/Ability/AbilityEffect.gd")]([ExtResource("1_m3cqm")])

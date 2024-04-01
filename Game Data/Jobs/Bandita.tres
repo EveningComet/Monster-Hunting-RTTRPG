@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Job" load_steps=3 format=3 uid="uid://dllvyphu6305m"]
+
+[ext_resource type="Script" path="res://Scripts/Stats/Job.gd" id="1_0kb6m"]
+[ext_resource type="Resource" uid="uid://lejby2iis5uc" path="res://Game Data/Abilities/Toss Explosive/Toss Explosive.tres" id="1_v0bs5"]
+
+[resource]
+script = ExtResource("1_0kb6m")
+job_name = "Bandita"
+description = "It is unknown as to whether or not she joined for pay or because she was looking to turn over a new leaf."
+abilities = Array[Resource("res://Scripts/Ability/Ability.gd")]([ExtResource("1_v0bs5")])
+allowed_weapon_types = Array[int]([1, 2])
+starting_fitness = 20
+starting_dexterity = 20
+starting_will = 20
+fitness_gain_on_increase = 3
+dexterity_gain_on_increase = 4
+will_gain_on_increase = 2

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Job" load_steps=2 format=3 uid="uid://c53rmo8xsa8j4"]
+
+[ext_resource type="Script" path="res://Scripts/Stats/Job.gd" id="1_k2py2"]
+
+[resource]
+script = ExtResource("1_k2py2")
+job_name = "Inquisitor"
+description = "This person comes from a long line of monster hunters."
+abilities = Array[Resource("res://Scripts/Ability/Ability.gd")]([])
+allowed_weapon_types = Array[int]([3, 4])
+starting_fitness = 20
+starting_dexterity = 20
+starting_will = 20
+fitness_gain_on_increase = 3
+dexterity_gain_on_increase = 3
+will_gain_on_increase = 3

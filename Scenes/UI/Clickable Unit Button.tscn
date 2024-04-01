@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbn8irig0oxvq"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ClickableUnitButton.gd" id="1_p4mmm"]
+[ext_resource type="Texture2D" uid="uid://dgrpi75iu20sc" path="res://Imported Assets/Flat UI/Menu-1-01_0001_Layer-14.png" id="1_wal4j"]
+
+[node name="Clickable Unit Button" type="TextureButton"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_wal4j")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_p4mmm")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvhskpntixovn"]
+
+[ext_resource type="Script" path="res://Scripts/Stats/ExperienceHandler.gd" id="1_f8see"]
+
+[node name="ExperienceHandler" type="Node"]
+script = ExtResource("1_f8see")

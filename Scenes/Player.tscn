@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://1afxrnm3p47x"]
+
+[ext_resource type="Script" path="res://Scripts/Player/CameraController.gd" id="1_agqth"]
+[ext_resource type="Script" path="res://Scripts/General Components/FactionOwner.gd" id="2_kbynq"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="3_8fdh0"]
+[ext_resource type="Script" path="res://Scripts/Player/Input Control States/WaitingForUnitSelection.gd" id="4_q2y5p"]
+[ext_resource type="Script" path="res://Scripts/Player/Input Control States/Directing.gd" id="5_mtgdx"]
+[ext_resource type="Script" path="res://Scripts/Player/Input Control States/FindingTargetForAbility.gd" id="6_fbjcs"]
+[ext_resource type="Script" path="res://Scripts/UI/SelectionBox.gd" id="7_2xhrn"]
+[ext_resource type="Script" path="res://Scripts/Player/SelectionController.gd" id="8_4ghpl"]
+
+[node name="Player" type="Node3D"]
+
+[node name="CameraController" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+script = ExtResource("1_agqth")
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+current = true
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("2_kbynq")
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("selection_controller")]
+script = ExtResource("3_8fdh0")
+selection_controller = NodePath("../SelectionController")
+initial_state = NodePath("WaitingForUnitSelection")
+
+[node name="WaitingForUnitSelection" type="Node" parent="PlayerController"]
+script = ExtResource("4_q2y5p")
+
+[node name="Directing" type="Node" parent="PlayerController"]
+script = ExtResource("5_mtgdx")
+
+[node name="FindingTargetForAbility" type="Node" parent="PlayerController"]
+script = ExtResource("6_fbjcs")
+
+[node name="SelectionBox" type="Node2D" parent="."]
+script = ExtResource("7_2xhrn")
+
+[node name="SelectionController" type="Node3D" parent="." node_paths=PackedStringArray("selection_box", "cam", "faction_owner")]
+script = ExtResource("8_4ghpl")
+selection_box = NodePath("../SelectionBox")
+cam = NodePath("../CameraController/Camera3D")
+faction_owner = NodePath("../FactionOwner")

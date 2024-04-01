@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnProjectile" load_steps=3 format=3 uid="uid://c5bphv4se6yhk"]
+
+[ext_resource type="PackedScene" uid="uid://bp0bypl754hm1" path="res://Scenes/Weapons/Projectiles/Dynamite Sticks.tscn" id="1_8jrcm"]
+[ext_resource type="Script" path="res://Scripts/Ability/Effects/SpawnProjectile.gd" id="1_bpped"]
+
+[resource]
+script = ExtResource("1_bpped")
+projectile_to_spawn = ExtResource("1_8jrcm")
+arcs = true
+curve_height = 5.0
+value_scale = 1.0
+uses_special_stat = false

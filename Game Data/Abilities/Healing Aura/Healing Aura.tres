@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://ckartx5jfv0kk"]
+
+[ext_resource type="Script" path="res://Scripts/Ability/Ability.gd" id="1_q8dj3"]
+[ext_resource type="Resource" uid="uid://b170oprpl0gcy" path="res://Game Data/Abilities/Healing Aura/Healing Aura Effect.tres" id="1_xqhe6"]
+
+[resource]
+script = ExtResource("1_q8dj3")
+ability_name = "New Ability"
+ability_description = "Heals allies within range."
+base_cooldown = 30.0
+max_range = 10.0
+special_cost = 1
+effects = Array[Resource("res://Scripts/Ability/AbilityEffect.gd")]([ExtResource("1_xqhe6")])

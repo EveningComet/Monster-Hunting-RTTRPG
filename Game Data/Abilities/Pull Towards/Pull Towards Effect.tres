@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PullTowards" load_steps=3 format=3 uid="uid://btkkthvhn6fkh"]
+
+[ext_resource type="Script" path="res://Scripts/Ability/Effects/PullTowards.gd" id="1_17b5y"]
+[ext_resource type="PackedScene" uid="uid://dc5k3srr5y3n3" path="res://Scenes/Weapons/Projectiles/Grab And Puller.tscn" id="1_ym3j1"]
+
+[resource]
+script = ExtResource("1_17b5y")
+grab_and_puller_scene = ExtResource("1_ym3j1")
+value_scale = 1.0
+uses_special_stat = false

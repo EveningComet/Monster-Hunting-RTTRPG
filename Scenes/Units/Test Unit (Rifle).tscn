@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://bl24m5aw2jybw"]
+
+[ext_resource type="Script" path="res://Scripts/General Components/FactionOwner.gd" id="1_juaex"]
+[ext_resource type="Script" path="res://Scripts/Stats/PlayerCharacterStats.gd" id="2_lr3he"]
+[ext_resource type="Script" path="res://Scripts/Unit/Mover.gd" id="3_85uww"]
+[ext_resource type="Script" path="res://Scripts/Unit/AwarenessRadius.gd" id="4_cxouw"]
+[ext_resource type="PackedScene" uid="uid://dcfm5ddt10s2c" path="res://Scenes/Weapons/Rifle.tscn" id="5_1r3au"]
+[ext_resource type="Script" path="res://Scripts/Unit/EquipmentBasedAttacker.gd" id="6_q1i6r"]
+[ext_resource type="Script" path="res://Scripts/Unit/AbilityHandler.gd" id="7_dxbjf"]
+[ext_resource type="Resource" uid="uid://lejby2iis5uc" path="res://Game Data/Abilities/Toss Explosive/Toss Explosive.tres" id="8_nxeag"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egakl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tgkw5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d88m8"]
+radius = 20.0
+
+[node name="Test Unit (Rifle)" type="CharacterBody3D" groups=["Units"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_egakl")
+
+[node name="GFX" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GFX"]
+mesh = SubResource("CapsuleMesh_tgkw5")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="GFX/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.627091, -0.357248)
+size = Vector3(0.5, 0.25, 0.5)
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("1_juaex")
+
+[node name="CharacterStats" type="Node" parent="."]
+script = ExtResource("2_lr3he")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 0.5
+
+[node name="Mover" type="Node" parent="." node_paths=PackedStringArray("navigation_agent")]
+script = ExtResource("3_85uww")
+navigation_agent = NodePath("../NavigationAgent3D")
+
+[node name="AwarenessRadius" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("4_cxouw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AwarenessRadius"]
+shape = SubResource("SphereShape3D_d88m8")
+
+[node name="Weapon Hold Pos" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.14765, -0.967893)
+
+[node name="Rifle" parent="Weapon Hold Pos" instance=ExtResource("5_1r3au")]
+
+[node name="EquipmentBasedAttacker" type="Node" parent="." node_paths=PackedStringArray("curr_weapon", "stats")]
+script = ExtResource("6_q1i6r")
+curr_weapon = NodePath("../Weapon Hold Pos/Rifle")
+range = 20.0
+stats = NodePath("../CharacterStats")
+activation_rate = 2.0
+
+[node name="AbilityHandler" type="Node" parent="."]
+script = ExtResource("7_dxbjf")
+abilities_to_instance = Array[Resource("res://Scripts/Ability/Ability.gd")]([ExtResource("8_nxeag")])

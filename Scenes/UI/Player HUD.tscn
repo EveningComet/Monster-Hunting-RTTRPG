@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv1w6dtr0v81x"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PlayerUnitsDisplayer.gd" id="1_ks24v"]
+[ext_resource type="PackedScene" uid="uid://dbn8irig0oxvq" path="res://Scenes/UI/Clickable Unit Button.tscn" id="2_1a3gu"]
+[ext_resource type="PackedScene" uid="uid://cyhmdp1p5xcue" path="res://Scenes/UI/Unit Ability Displayer.tscn" id="3_emvtn"]
+
+[node name="Player HUD" type="Control" node_paths=PackedStringArray("unit_ability_displayer", "container")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = 10.0
+grow_vertical = 0
+script = ExtResource("1_ks24v")
+unit_ability_displayer = NodePath("Unit Ability Displayer")
+clickable_prefab = ExtResource("2_1a3gu")
+container = NodePath("Unit Clickable Grid")
+
+[node name="Unit Clickable Grid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/h_separation = 5
+columns = 10
+
+[node name="Unit Ability Displayer" parent="." instance=ExtResource("3_emvtn")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -189.0
+offset_right = 100.0
+offset_bottom = -89.0
+grow_vertical = 0

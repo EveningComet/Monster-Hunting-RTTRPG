@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnlmujxkoq3ti"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/Projectile.gd" id="1_yv6ur"]
+[ext_resource type="Script" path="res://Scripts/General Components/FactionOwner.gd" id="2_u411b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sf802"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etm4s"]
+albedo_color = Color(0.8, 0.776471, 0, 1)
+
+[node name="Projectile" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_yv6ur")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_sf802")
+
+[node name="GFX" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="GFX"]
+size = Vector3(0.3, 0.3, 0.3)
+material = SubResource("StandardMaterial3D_etm4s")
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("2_u411b")

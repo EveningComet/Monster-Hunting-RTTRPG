@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://blaf0j54kgg0l"]
+
+[ext_resource type="Script" path="res://Scripts/UI/AbilitySlotUI.gd" id="1_fa8gh"]
+[ext_resource type="Texture2D" uid="uid://b84j6oifa0mur" path="res://Imported Assets/Flat UI/Menu-1-01_0005_Layer-18.png" id="1_wowsx"]
+[ext_resource type="Texture2D" uid="uid://b87681waswdvv" path="res://Imported Assets/Flat UI/Menu-1-01_0042_Layer-10.png" id="3_4q8wm"]
+[ext_resource type="Texture2D" uid="uid://c0kvu3ufubrnl" path="res://icon.svg" id="3_fv76i"]
+
+[node name="Ability Slot UI" type="TextureButton" node_paths=PackedStringArray("ability_icon", "progress_bar", "cooldown_counter_displayer", "cooldown_timer")]
+custom_minimum_size = Vector2(60, 60)
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_wowsx")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_fa8gh")
+ability_icon = NodePath("MarginContainer/Ability Icon")
+progress_bar = NodePath("Sweep")
+cooldown_counter_displayer = NodePath("MarginContainer2/Cooldown Counter Displayer")
+cooldown_timer = NodePath("Cooldown Timer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Ability Icon" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_fv76i")
+expand_mode = 1
+
+[node name="Sweep" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("3_4q8wm")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Cooldown Counter Displayer" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+text = "1.0"
+horizontal_alignment = 1
+
+[node name="Cooldown Timer" type="Timer" parent="."]
+one_shot = true
