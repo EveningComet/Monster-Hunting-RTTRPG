@@ -16,6 +16,11 @@ run/main_scene="res://Scenes/Game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Imported Assets/Icons/dinosaur-bones.svg"
 
+[autoload]
+
+EventBus="*res://Scripts/Autoloads/EventBus.gd"
+PlayerPartyController="*res://Scripts/Autoloads/PlayerPartyController.gd"
+
 [display]
 
 window/size/viewport_width=1920

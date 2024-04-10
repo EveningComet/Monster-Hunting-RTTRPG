@@ -53,7 +53,6 @@ func display(unit_to_display: Node3D) -> void:
 	
 	# Set the current unit and display all the abilities
 	current_unit = unit_to_display
-	current_unit.get_node("CharacterStats").unit_died.connect( on_unit_died )
 	ability_handler.ability_executed.connect( on_ability_executed )
 	for ab in instanced_abilities:
 		var a_slot: AbilitySlotUI = a_slot_scene.instantiate()
@@ -74,7 +73,6 @@ func hide_display() -> void:
 	if current_unit != null:
 		
 		# Unsub from all the relevant events
-		current_unit.get_node("CharacterStats").unit_died.disconnect( on_unit_died )
 		current_unit.get_node("AbilityHandler").ability_executed.disconnect( on_ability_executed )
 	
 	current_unit = null

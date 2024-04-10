@@ -13,6 +13,7 @@ extends Control
 ## Prefab of the object we will use to quickly click on the units.
 @export var clickable_prefab: PackedScene
 
+## Where the ui will be stored.
 @export var container: Container
 
 ## Connect a unit to a clickable button.
@@ -23,15 +24,7 @@ var unit_to_clickable: Dictionary = {}
 var selection_controller: SelectionController
 
 func _ready() -> void:
-	if player_to_monitor == null:
-		emergency_output()
-	else:
-		setup_units_to_display()
-
-func emergency_output() -> void:
-	printerr(
-		"PlayerUnitsDisplayer :: We were not properly given a player!"
-	)
+	setup_units_to_display()
 
 func setup_units_to_display() -> void:
 	var faction: FactionOwner = player_to_monitor.get_node("FactionOwner")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://121wbdbbdudy"]
+[gd_scene load_steps=17 format=3 uid="uid://121wbdbbdudy"]
 
 [ext_resource type="PackedScene" uid="uid://1afxrnm3p47x" path="res://Scenes/Player.tscn" id="1_n1kqg"]
 [ext_resource type="Texture2D" uid="uid://bk2u1jpwcxkkf" path="res://Imported Assets/KenneyNL Prototyping Textures/Dark/texture_01.png" id="2_ja0ne"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://der742kg55kut" path="res://Scenes/UI/Pause Menu.tscn" id="6_2pc1c"]
 [ext_resource type="PackedScene" uid="uid://bv1w6dtr0v81x" path="res://Scenes/UI/Player HUD.tscn" id="7_p4ver"]
 [ext_resource type="PackedScene" uid="uid://cvhskpntixovn" path="res://Scenes/Experience Handler.tscn" id="9_ajnwy"]
+[ext_resource type="Script" path="res://Scripts/Stats/DeathHandler.gd" id="10_52e5o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i5om6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -73,12 +74,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58478, 0.709229, -2.06213)
 [node name="Test Monster" parent="." instance=ExtResource("4_qw3y6")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -25)
 
+[node name="ExperienceHandler" parent="." instance=ExtResource("9_ajnwy")]
+
+[node name="DeathHandler" type="Node" parent="."]
+script = ExtResource("10_52e5o")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Player HUD" parent="CanvasLayer" node_paths=PackedStringArray("player_to_monitor") instance=ExtResource("7_p4ver")]
 player_to_monitor = NodePath("../../Player")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_2pc1c")]
-
-[node name="ExperienceHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_ajnwy")]
-player = NodePath("../Player")

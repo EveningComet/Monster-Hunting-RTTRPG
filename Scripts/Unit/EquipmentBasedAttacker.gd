@@ -50,4 +50,3 @@ func on_melee_weapon_hitbox_entered(body: Node3D) -> void:
 		var power = get_power()
 		var target_stats: CharacterStats = body.get_node("CharacterStats")
 		target_stats.take_damage( power )
-		print("EquipmentBasedAttacker :: %s is taking %s damage." % [body.name, power])

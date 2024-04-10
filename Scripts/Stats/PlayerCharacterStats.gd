@@ -2,11 +2,14 @@
 class_name PlayerCharacterStats
 extends CharacterStats
 
+func _ready() -> void:
+	super()
+	PlayerPartyController.add_party_member( self )
+
 func die() -> void:
-	unit_died.emit( self )
+	super()
 	
 	# Turn off the components until we're all good.
-	
 
 ## Get the character back up.
 func revive() -> void:

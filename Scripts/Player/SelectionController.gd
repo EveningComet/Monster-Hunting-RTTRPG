@@ -3,7 +3,7 @@ class_name SelectionController
 extends Node3D
 
 ## Emitted when the player has selected units.
-signal units_that_are_selected( units_collected: Array[Node3D])
+signal units_that_are_selected(units_collected: Array[Node3D])
 
 ## Middleman event used to tell the player to enter ability target selection
 ## mode.
@@ -47,6 +47,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		# Look for units to select
 		select_units( mouse_pos )
+
+func _ready() -> void:
+	EventBus.hp_depleted.connect( on_hp_depleted )
 
 ## Set the status for allowed to work.
 func set_allowed_to_work_status(new_status: bool) -> void:
@@ -95,21 +98,10 @@ func select_units_through_array(newly_selected_units: Array[Node3D] = []) -> voi
 		
 		# Add the unit if we don't already have them selected
 		if selected_units.has( i ) == false:
-			
-			# Subscribe to any relevant events
-			# We want to know when this unit dies
-			var cs: CharacterStats = i.get_node("CharacterStats")
-			cs.unit_died.connect(on_unit_died)
-			
 			selected_units.append( i )
 
 ## Clear our selected units.
 func clear_selection() -> void:
-	# Unsub from any events on the unit.
-	for u in selected_units:
-		var cs: CharacterStats = u.get_node("CharacterStats")
-		cs.unit_died.disconnect(on_unit_died)
-	
 	selected_units.clear()
 	
 	# Tell anyone that cares about the cleared selection
@@ -173,15 +165,15 @@ func raycast_check_for_area(m_pos: Vector2):
 	return space_state.intersect_ray( query )
 
 ## When a selected unit dies, what should we do?
-func on_unit_died(dying_unit: CharacterStats) -> void:
-	# Remove the dead unit from our selection and unsub from the event.
-	selected_units.erase( dying_unit.get_parent() )
-	dying_unit.unit_died.disconnect(on_unit_died)
+func on_hp_depleted(dying_unit: CharacterStats) -> void:
+	# Remove the dead unit from our selection and unsub from any events
+	if selected_units.has(dying_unit.get_parent()):
+		selected_units.erase(dying_unit.get_parent())
 	
 	# Tell anything about the change.
 	units_that_are_selected.emit( selected_units )
 
-## Used as a middleman between the ui to make the 
+## Used as a middleman between the ui.
 func ability_slot_button_activated(
 	unit_activating_ability: Node3D,
 	ability_activated: AbilitySlotData

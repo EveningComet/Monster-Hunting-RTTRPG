@@ -80,8 +80,6 @@ func initialize_stats() -> void:
 		stats[StatTypes.stat_types.MaxSP].get_calculated_value(),
 		true
 	)
-	
-	print("CharacterStats :: %s has %s as starting health." % [get_parent().name, stats[StatTypes.stat_types.CurrentHP].get_calculated_value()])
 
 # TODO: Recharge health and special points overtime.
 
@@ -144,11 +142,13 @@ func get_stat(stat_to_get: StatTypes.stat_types) -> Stat:
 func add_modifier(stat_type: StatTypes.stat_types, modifier: StatModifier) -> void:
 	stats[stat_type].add_modifier( modifier )
 	# Tell anything that cares about our stat change
+	stat_changed.emit( self )
 
 ## Remove a modifier from the passed stat.
 func remove_modifier(stat_type: StatTypes.stat_types, modifier: StatModifier) -> void:
 	stats[stat_type].remove_modifier( modifier )
 	# Tell anything that cares about our stat change
+	stat_changed.emit( self )
 
 func raise_base_value(stat_type: StatTypes.stat_types, amount: float) -> void:
 	stats[stat_type]
@@ -185,22 +185,10 @@ func gain_experience(gain_amount: int) -> void:
 
 ## Function called when a character level ups.
 func level_up() -> void:
-	
-	# Raise the level and increase the experience requirement
-	current_level += 1
-	experience_required = get_experience_required(
-		current_level
-	)
-	
-	# TODO: Filler boost.
-	
-	# Fire an event to tell anything about the stats change
-	stat_changed.emit( self )
-	print("CharacterStats :: %s has leveled up!" % get_parent().name)
+	pass
 
 ####
 
 func die() -> void:
 	# Tell everyone that cares we're dead.
-	unit_died.emit( self )
-	get_parent().queue_free()
+	EventBus.hp_depleted.emit( self )
